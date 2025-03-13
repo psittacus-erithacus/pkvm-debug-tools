@@ -1,0 +1,27 @@
+pkvm-tools contains the pkvm-dbg-tools module and tools for building initramfs.
+pkvm modules are loaded at kernel startup, so they must be in the initramfs.
+
+pkvm-dbg-tools provides debug tools for debugging the hypervisor
+	print-s2-mapping
+		print host and guests stage-2 mappings
+	count-shared-mappings
+		print and count shared mappings
+	hyp_print function for EL2 code
+		debug printings from hypervisor
+
+Build instructions:
+The following variables must be defined:
+	KERNEL_DIR points to the Kernel source code directory
+	UBUNTU_DIR points to ubuntu root directory
+	CROSS_COMPILE points to cross compiler
+	OUT_IMAGE image where the compressed initramfs will be copied
+
+make pkvm-dbg-tools
+make initramfs
+make -C initramfs install 
+
+you can configure the kernel to use the generated cpio file as the internal
+initramfs by setting the configuration option CONFIG_INITRAMFS_SOURCE
+to point to the generated cpio file
+Pkvm modules are loaded from initramfs and pkvm prevents them from being 
+loaded later.
