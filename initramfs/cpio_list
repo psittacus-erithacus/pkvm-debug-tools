@@ -1,0 +1,45 @@
+dir /dev 755 0 0
+nod /dev/console 0600 0 0 c 5 1
+nod /dev/vda1 07550 0 0 b 254 1
+dir /root 0777 0 0
+dir /usr 755 000 000
+dir /usr/bin 755 00 000
+dir /sbin 755 00 000
+dir /lib 755 00 000
+dir /lib/aarch64-linux-gnu 755 000 000
+dir /proc 755 0 0
+dir /sys 755 0 0
+dir /mnt 755 0 0
+dir /etc 755 0 0
+
+slink /bin /usr/bin 755 0 0 
+slink /usr/lib /lib 777 0 0 
+
+file /sbin/kmod        root/usr/bin/kmod 755 0 0
+ 
+##
+file /lib/aarch64-linux-gnu/ld-linux-aarch64.so.1   root/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1 755 0 0
+file /lib/aarch64-linux-gnu/libc.so.6               root/usr/lib/aarch64-linux-gnu//libc.so.6 755 0 0
+file /lib/aarch64-linux-gnu/libcrypto.so.3          root/usr/lib/aarch64-linux-gnu/libcrypto.so.3 755 0 0
+file /lib/aarch64-linux-gnu/libzstd.so.1            root/usr/lib/aarch64-linux-gnu/libzstd.so.1 755 0 0
+file /lib/aarch64-linux-gnu/liblzma.so.5            root/usr/lib/aarch64-linux-gnu/liblzma.so.5 755 0 0
+
+slink /sbin/modprobe /sbin/kmod 755 0 0
+slink /lib/ld-linux-aarch64.so.1 aarch64-linux-gnu/ld-linux-aarch64.so.1 755 0 0
+
+dir /lib/modules 755 0 0 
+dir /lib/modules/$(KERNEL) 755 0 0 
+file /lib/modules/$(KERNEL)/modules.alias       root/lib/modules/$(KERNEL)/modules.alias 755 0 0
+file /lib/modules/$(KERNEL)/modules.alias.bin   root/lib/modules/$(KERNEL)/modules.alias.bin 755 0 0
+file /lib/modules/$(KERNEL)/modules.builtin.alias.bin root/lib/modules/$(KERNEL)/modules.builtin.alias.bin 755 0 0
+file /lib/modules/$(KERNEL)/modules.builtin.bin root/lib/modules/$(KERNEL)/modules.builtin.bin 755 0 0
+file /lib/modules/$(KERNEL)/modules.dep         root/lib/modules/$(KERNEL)/modules.dep 755 0 0
+file /lib/modules/$(KERNEL)/modules.dep.bin     root/lib/modules/$(KERNEL)/modules.dep.bin 755 0 0
+file /lib/modules/$(KERNEL)/modules.devname     root/lib/modules/$(KERNEL)/modules.devname 755 0 0
+file /lib/modules/$(KERNEL)/modules.softdep     root/lib/modules/$(KERNEL)/modules.softdep 755 0 0
+file /lib/modules/$(KERNEL)/modules.symbols     root/lib/modules/$(KERNEL)/modules.symbols 755 0 0
+file /lib/modules/$(KERNEL)/modules.symbols.bin root/lib/modules/$(KERNEL)/modules.symbols.bin 755 0 0
+
+dir /lib/modules/$(KERNEL)/updates 755 0 0 
+file /lib/modules/$(KERNEL)/updates/pkvm-dbg-tools.ko   root/lib/modules/$(KERNEL)/updates/pkvm-dbg-tools.ko 755 0 0
+
