@@ -1,13 +1,21 @@
-pkvm-tools contains the pkvm-dbg-tools module and tools for building initramfs.
-pkvm modules are loaded at kernel startup, so they must be in the initramfs.
+pkvm-debug-tools contains  stuff for pkvm debugging.
 
-pkvm-dbg-tools provides debug tools for debugging the hypervisor
+pkvm-debug-module: pkvm loadable module that containt tools for pkvm debugging
 	print-s2-mapping
 		print host and guests stage-2 mappings
 	count-shared-mappings
 		print and count shared mappings
 	hyp_print function for EL2 code
 		debug printings from hypervisor
+	ramlog handling
+	
+utils/hypdbg: very simple tool user for using the debugger
+utils/hypdbgrs: rust based user tool user for using the debugger
+utils/decrypt-hyplog: tool for decrypting ramlog
+
+initramfs: tools for building initramfs. 
+pkvm modules are loaded at kernel startup, so they must be in the initramfs
+pkvm prevents them from being loaded later.
 
 Build instructions:
 The following variables must be defined:
@@ -23,5 +31,4 @@ make -C initramfs install
 you can configure the kernel to use the generated cpio file as the internal
 initramfs by setting the configuration option CONFIG_INITRAMFS_SOURCE
 to point to the generated cpio file
-Pkvm modules are loaded from initramfs and pkvm prevents them from being 
-loaded later.
+

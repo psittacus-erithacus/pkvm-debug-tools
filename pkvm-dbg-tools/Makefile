@@ -1,5 +1,3 @@
-#CDIR=$(CURDIR)
-
 ifneq ($(KERNELRELEASE),)
 clean-files := hyp/hyp.lds hyp/hyp-reloc.S
 

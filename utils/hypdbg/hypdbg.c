@@ -15,7 +15,7 @@ typedef uint64_t u64;
 typedef uint32_t u32;
 typedef uint8_t u8;
 
-#include "hypdbg-drv.h"
+#include "hypdrv_ioctl.h"
 
 #define BUFSIZE 4096
 
@@ -50,8 +50,6 @@ int count_shared(int fd, u32 *len, u64 id, u64 size, u64 lock)
 	ret = ioctl(fd, HYPDBG_COUNT_SHARED_S2_MAPPING, &params);
 	if (ret)
 		return ret;
-	*len = params.dlen;
-	printf("ret %x %d\n",ret, *len);
 	return 0;
 }
 
@@ -68,8 +66,6 @@ int print_s2_mapping(int fd, u32 *len, u64 id, u64 addr, u64 size)
 	ret = ioctl(fd, HYPDBG_PRINT_S2_MAPPING, &params);
 	if (ret)
 		return ret;
-	*len = params.dlen;
-	printf("ret %x %d\n",ret, *len);
 	return 0;
 }
 
@@ -83,7 +79,6 @@ int print_ramlog(int fd)
 	ret = ioctl(fd, HYPDBG_PRINT_RAMLOG, &params);
 	if (ret)
 		return ret;
-	printf("ret %x\n",ret);
 	return 0;
 }
 
@@ -111,9 +106,9 @@ int do_ioctl(int fd, int call, u32 *len, int argc, char *argv[])
 				ret = print_s2_mapping(fd, len, id, addr, size);
 		}
 		break;
-    case 3:
-        ret = print_ramlog(fd);
-        break;
+	case 3:
+		ret = print_ramlog(fd);
+		break;
 	default:
 		usage();
 		return -1;
@@ -151,7 +146,7 @@ int main(int argc, char *argv[])
 
 	ret = do_ioctl(fd, call, &rlen, argc - 2, &argv[2]);
 	if (ret) {
-		printf("ioctl err %x\n",ret);
+		printf("ioctl err %x\n", ret);
 		goto err;
 	}
 
@@ -163,10 +158,10 @@ int main(int argc, char *argv[])
 	int tmp = 0;
 
 	do {
-		memset(resp,0,BUFSIZE);
+		memset(resp, 0, BUFSIZE);
 		cnt = read(fd, resp, BUFSIZE);
 		if (cnt < 0) {
-			printf("read error %d\n",cnt);
+			printf("read error %d\n", cnt);
 			return 1;
 		}
 		printf("%s", resp);
