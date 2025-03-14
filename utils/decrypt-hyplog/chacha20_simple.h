@@ -32,11 +32,10 @@ extern "C"
 {
 #endif
 
-typedef struct
-{
-  uint32_t schedule[16];
-  uint32_t keystream[16];
-  size_t available;
+typedef struct {
+	uint32_t schedule[16];
+	uint32_t keystream[16];
+	size_t available;
 } chacha20_ctx;
 
 //Call this to initilize a chacha20_ctx, must be called before all other functions
