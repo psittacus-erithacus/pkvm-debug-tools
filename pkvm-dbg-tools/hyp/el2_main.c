@@ -35,7 +35,7 @@ int pkvm_driver_hyp_init(const struct pkvm_module_ops *a_ops)
 	if (ret)
 		return ret;
 
-	hyp_print("Greetings from EL2!!!\n");
+	hyp_print("Pkvm debugger initiated\n");
 	dops->register_hyp_print(&hyp_print);
 	debug_dump_csrs();
 	return 0;
