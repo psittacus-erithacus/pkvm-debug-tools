@@ -15,7 +15,7 @@ typedef uint64_t u64;
 typedef uint32_t u32;
 typedef uint8_t u8;
 
-#include "hypdbg-drv.h"
+#include "hypdrv_ioctl.h"
 
 #define BUFSIZE 4096
 
